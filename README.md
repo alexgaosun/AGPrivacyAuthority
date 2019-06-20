@@ -5,7 +5,13 @@
 4.相册权限代码范例  
 <pre>
     <code>
-        Whatever code you want to show
+        ag_openAlbumServiceWithBlock(true) { (tag) in
+                if tag {
+                    btn.setTitle("开启", for: .normal)
+                } else {
+                    btn.setTitle("相册没开启", for: .normal)
+                }
+            }
     </code>
 </pre>
 
