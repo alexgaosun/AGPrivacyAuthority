@@ -4,13 +4,13 @@
 3.封装OpenURL可直接跳转到设置页面使用  
 4.相册权限代码范例  
 ag_openAlbumServiceWithBlock(true) { (tag) in  
-DispatchQueue.main.async(execute: {  
-if tag {//开启权限  
-btn.setTitle("开启", for: .normal)  
-} else {//权限未开启    
-btn.setTitle("相册没开启", for: .normal)  
-}  
-})  
+   DispatchQueue.main.async(execute: {  
+      if tag {//开启权限  
+         btn.setTitle("开启", for: .normal)  
+      } else {//权限未开启    
+         btn.setTitle("相册没开启", for: .normal)  
+      }  
+   })  
 }
 
 
