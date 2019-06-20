@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="pUC-gb-JSD">
+    <device id="retina6_1" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="dq7-hP-YJt">
+            <objects>
+                <viewController id="pUC-gb-JSD" customClass="ViewController" customModule="AGPrivacyAuhorityDemo" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="qY5-Je-ken">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ebl-bh-q20">
+                                <rect key="frame" x="184" y="104" width="46" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="V21-pb-Iyi"/>
+                                </constraints>
+                                <connections>
+                                    <action selector="buttonClick:" destination="pUC-gb-JSD" eventType="touchUpInside" id="gtR-VA-C7S"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="p3a-uv-s4k">
+                                <rect key="frame" x="184" y="174" width="46" height="50"/>
+                                <state key="normal" title="互联网"/>
+                                <connections>
+                                    <action selector="buttonClick:" destination="pUC-gb-JSD" eventType="touchUpInside" id="KRR-rn-cnX"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="z5V-WL-sRb">
+                                <rect key="frame" x="184" y="244" width="46" height="50"/>
+                                <state key="normal" title="定位"/>
+                                <connections>
+                                    <action selector="buttonClick:" destination="pUC-gb-JSD" eventType="touchUpInside" id="9bv-un-6f2"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MGf-xT-lEx">
+                                <rect key="frame" x="184" y="314" width="46" height="50"/>
+                                <state key="normal" title="相册"/>
+                                <connections>
+                                    <action selector="buttonClick:" destination="pUC-gb-JSD" eventType="touchUpInside" id="Nsr-Gg-esh"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="37W-Kz-eVa">
+                                <rect key="frame" x="184" y="384" width="46" height="50"/>
+                                <state key="normal" title="相机"/>
+                                <connections>
+                                    <action selector="buttonClick:" destination="pUC-gb-JSD" eventType="touchUpInside" id="2A3-G3-D6U"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" tag="5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Spl-8U-ool">
+                                <rect key="frame" x="184" y="454" width="46" height="50"/>
+                                <state key="normal" title="麦克风"/>
+                                <connections>
+                                    <action selector="buttonClick:" destination="pUC-gb-JSD" eventType="touchUpInside" id="7IL-QP-Khn"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="z5V-WL-sRb" firstAttribute="centerX" secondItem="qY5-Je-ken" secondAttribute="centerX" id="0O7-SX-C7L"/>
+                            <constraint firstItem="Spl-8U-ool" firstAttribute="height" secondItem="37W-Kz-eVa" secondAttribute="height" id="7er-gl-2xK"/>
+                            <constraint firstItem="p3a-uv-s4k" firstAttribute="top" secondItem="ebl-bh-q20" secondAttribute="bottom" constant="20" id="Do2-BS-WMu"/>
+                            <constraint firstItem="Spl-8U-ool" firstAttribute="top" secondItem="37W-Kz-eVa" secondAttribute="bottom" constant="20" id="GgJ-w7-ppI"/>
+                            <constraint firstItem="p3a-uv-s4k" firstAttribute="width" secondItem="ebl-bh-q20" secondAttribute="width" id="LXP-ne-G92"/>
+                            <constraint firstItem="37W-Kz-eVa" firstAttribute="height" secondItem="ebl-bh-q20" secondAttribute="height" id="LvI-dP-L0y"/>
+                            <constraint firstItem="MGf-xT-lEx" firstAttribute="width" secondItem="ebl-bh-q20" secondAttribute="width" id="NOl-c7-JVR"/>
+                            <constraint firstItem="37W-Kz-eVa" firstAttribute="centerX" secondItem="qY5-Je-ken" secondAttribute="centerX" id="Q1y-W7-9PC"/>
+                            <constraint firstItem="MGf-xT-lEx" firstAttribute="top" secondItem="z5V-WL-sRb" secondAttribute="bottom" constant="20" id="R5u-b4-79N"/>
+                            <constraint firstItem="ebl-bh-q20" firstAttribute="centerX" secondItem="qY5-Je-ken" secondAttribute="centerX" id="SFC-1i-cht"/>
+                            <constraint firstItem="Spl-8U-ool" firstAttribute="width" secondItem="37W-Kz-eVa" secondAttribute="width" id="SqX-sh-q2z"/>
+                            <constraint firstItem="p3a-uv-s4k" firstAttribute="height" secondItem="ebl-bh-q20" secondAttribute="height" id="UWe-OB-y11"/>
+                            <constraint firstItem="ebl-bh-q20" firstAttribute="top" secondItem="alg-xQ-xwF" secondAttribute="top" constant="60" id="bN8-Wi-gfx"/>
+                            <constraint firstItem="z5V-WL-sRb" firstAttribute="top" secondItem="p3a-uv-s4k" secondAttribute="bottom" constant="20" id="dV8-aW-JfY"/>
+                            <constraint firstItem="z5V-WL-sRb" firstAttribute="width" secondItem="ebl-bh-q20" secondAttribute="width" id="gzg-ts-xJh"/>
+                            <constraint firstItem="z5V-WL-sRb" firstAttribute="height" secondItem="ebl-bh-q20" secondAttribute="height" id="idb-YQ-gpb"/>
+                            <constraint firstItem="37W-Kz-eVa" firstAttribute="top" secondItem="MGf-xT-lEx" secondAttribute="bottom" constant="20" id="iwS-fz-vEf"/>
+                            <constraint firstItem="MGf-xT-lEx" firstAttribute="centerX" secondItem="qY5-Je-ken" secondAttribute="centerX" id="mKT-Bz-PMK"/>
+                            <constraint firstItem="p3a-uv-s4k" firstAttribute="centerX" secondItem="qY5-Je-ken" secondAttribute="centerX" id="mMv-Z9-Ad5"/>
+                            <constraint firstItem="MGf-xT-lEx" firstAttribute="height" secondItem="ebl-bh-q20" secondAttribute="height" id="oyh-7l-CCi"/>
+                            <constraint firstItem="37W-Kz-eVa" firstAttribute="width" secondItem="ebl-bh-q20" secondAttribute="width" id="tyz-s7-Iqg"/>
+                            <constraint firstItem="Spl-8U-ool" firstAttribute="centerX" secondItem="qY5-Je-ken" secondAttribute="centerX" id="yPk-vA-cRG"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="alg-xQ-xwF"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="yph-sq-xg2" sceneMemberID="firstResponder"/>
+            </objects>
+        </scene>
+    </scenes>
+</document>
