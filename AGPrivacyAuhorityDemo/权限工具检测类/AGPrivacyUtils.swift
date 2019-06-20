@@ -51,13 +51,15 @@ func ag_openEventServiceWithBolck(_ isOpenURL:Bool? = nil,_ action :@escaping ((
     DispatchQueue.main.async(execute: {
         let cellularData = CTCellularData()
         cellularData.cellularDataRestrictionDidUpdateNotifier = { (state) in
-            if state == CTCellularDataRestrictedState.restrictedStateUnknown ||  state == CTCellularDataRestrictedState.notRestricted {
-                action(false)
-                if isOpenURL == true {ag_OpenURL(.network)}
-            } else {
-                
-                action(true)
-            }
+            DispatchQueue.main.async(execute: {
+                if state == CTCellularDataRestrictedState.restrictedStateUnknown ||  state == CTCellularDataRestrictedState.notRestricted {
+                    action(false)
+                    if isOpenURL == true {ag_OpenURL(.network)}
+                } else {
+                    
+                    action(true)
+                }
+            })
         }
         let state = cellularData.restrictedState
         if state == CTCellularDataRestrictedState.restrictedStateUnknown ||  state == CTCellularDataRestrictedState.notRestricted {
@@ -85,25 +87,6 @@ func ag_openLocationServiceWithBlock(_ isSet:Bool? = nil,_ action :@escaping ((B
     action(isOpen)
 }
 
-// MARK: - 检测是否开启摄像头
-/*pragma
- isOpenURL: true:是否提示跳转设置页面, false:不提是弹出页面
- action: 回调Bool，true是开启权限，false：未开启权限
- */
-func ag_openCaptureDeviceServiceWithBlock(_ isSet:Bool? = nil,_ action :@escaping ((Bool)->())) {
-    let authStatus = AVCaptureDevice.authorizationStatus(for: AVMediaType.video)
-    if authStatus == AVAuthorizationStatus.notDetermined {
-        AVCaptureDevice.requestAccess(for: AVMediaType.video) { (granted) in
-            action(granted)
-            if granted == false && isSet == true {ag_OpenURL(.camera)}
-        }
-    } else if authStatus == AVAuthorizationStatus.restricted || authStatus == AVAuthorizationStatus.denied {
-        action(false)
-        if isSet == true {ag_OpenURL(.camera)}
-    } else {
-        action(true)
-    }
-}
 // MARK: - 检测是否开启相册
 /*pragma
  isOpenURL: true:是否提示跳转设置页面, false:不提是弹出页面
@@ -112,22 +95,47 @@ func ag_openCaptureDeviceServiceWithBlock(_ isSet:Bool? = nil,_ action :@escapin
 func ag_openAlbumServiceWithBlock(_ isSet:Bool? = nil,_ action :@escaping ((Bool)->())) {
     PHPhotoLibrary.shared().performChanges({//首次必须开启相册权限请求
     }, completionHandler: { (isSucess, error) in
-        if isSucess {
-           action(true)
-        }
-        if (error != nil) {
-            let code = (error! as NSError).code
-            if code == 2047 {
-                var isOpen = true
-                let authStatus = PHPhotoLibrary.authorizationStatus()//authorizationStatus
-                if authStatus == PHAuthorizationStatus.restricted || authStatus == PHAuthorizationStatus.denied {
-                    isOpen = false;
-                    if isSet == true {ag_OpenURL(.photo)}
-                }
-                action(isOpen)
+        DispatchQueue.main.async(execute: {
+            if isSucess {
+                action(true)
             }
-        }
+            if (error != nil) {
+                let code = (error! as NSError).code
+                if code == 2047 {
+                    var isOpen = true
+                    let authStatus = PHPhotoLibrary.authorizationStatus()//authorizationStatus
+                    if authStatus == PHAuthorizationStatus.restricted || authStatus == PHAuthorizationStatus.denied {
+                        isOpen = false;
+                        if isSet == true {ag_OpenURL(.photo)}
+                    }
+                    action(isOpen)
+                }
+            }
+        })
     })
+}
+
+// MARK: - 检测是否开启摄像头
+/*pragma
+ isOpenURL: true:是否提示跳转设置页面, false:不提是弹出页面
+ action: 回调Bool，true是开启权限，false：未开启权限
+ */
+func ag_openCaptureDeviceServiceWithBlock(_ isSet:Bool? = nil,_ action :@escaping ((Bool)->())) {
+    let authStatus = AVCaptureDevice.authorizationStatus(for: AVMediaType.video)
+    
+    if authStatus == AVAuthorizationStatus.notDetermined {
+        AVCaptureDevice.requestAccess(for: AVMediaType.video) { (granted) in
+            DispatchQueue.main.async(execute: {
+                action(granted)
+                if granted == false && isSet == true {ag_OpenURL(.camera)}
+            })
+        }
+    } else if authStatus == AVAuthorizationStatus.restricted || authStatus == AVAuthorizationStatus.denied {
+        action(false)
+        if isSet == true {ag_OpenURL(.camera)}
+    } else {
+        action(true)
+    }
 }
 
 // MARK: - 检测是否开启麦克风
@@ -139,8 +147,10 @@ func ag_openRecordServiceWithBlock(_ isSet:Bool? = nil,_ action :@escaping ((Boo
     let permissionStatus = AVAudioSession.sharedInstance().recordPermission
     if permissionStatus == AVAudioSession.RecordPermission.undetermined {
         AVAudioSession.sharedInstance().requestRecordPermission { (granted) in
-            action(granted)
-            if granted == false && isSet == true {ag_OpenURL(.microphone)}
+            DispatchQueue.main.async(execute: {
+                action(granted)
+                if granted == false && isSet == true {ag_OpenURL(.microphone)}
+            })
         }
     } else if permissionStatus == AVAudioSession.RecordPermission.denied || permissionStatus == AVAudioSession.RecordPermission.undetermined{
         action(false)
