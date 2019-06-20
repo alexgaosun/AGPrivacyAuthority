@@ -107,6 +107,16 @@ func ag_openAlbumServiceWithBlock(_ isSet:Bool? = nil,_ action :@escaping ((Bool
                     if authStatus == PHAuthorizationStatus.restricted || authStatus == PHAuthorizationStatus.denied {
                         isOpen = false;
                         if isSet == true {ag_OpenURL(.photo)}
+                    }else if (authStatus == .notDetermined) {//首次使用
+                        PHPhotoLibrary.requestAuthorization({ (firstStatus) in
+                            DispatchQueue.main.async(execute: {
+                                let isTrue = (firstStatus == .authorized)
+                                if isTrue {
+                                    action(true)
+                                }
+                                
+                            })
+                        })
                     }
                     action(isOpen)
                 }
@@ -125,10 +135,8 @@ func ag_openCaptureDeviceServiceWithBlock(_ isSet:Bool? = nil,_ action :@escapin
     
     if authStatus == AVAuthorizationStatus.notDetermined {
         AVCaptureDevice.requestAccess(for: AVMediaType.video) { (granted) in
-            DispatchQueue.main.async(execute: {
-                action(granted)
-                if granted == false && isSet == true {ag_OpenURL(.camera)}
-            })
+            action(granted)
+            if granted == false && isSet == true {ag_OpenURL(.camera)}
         }
     } else if authStatus == AVAuthorizationStatus.restricted || authStatus == AVAuthorizationStatus.denied {
         action(false)
