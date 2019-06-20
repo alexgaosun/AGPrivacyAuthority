@@ -112,6 +112,9 @@ func ag_openCaptureDeviceServiceWithBlock(_ isSet:Bool? = nil,_ action :@escapin
 func ag_openAlbumServiceWithBlock(_ isSet:Bool? = nil,_ action :@escaping ((Bool)->())) {
     PHPhotoLibrary.shared().performChanges({//首次必须开启相册权限请求
     }, completionHandler: { (isSucess, error) in
+        if isSucess {
+           action(true)
+        }
         if (error != nil) {
             let code = (error! as NSError).code
             if code == 2047 {
